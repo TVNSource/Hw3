@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Form Before Submit</title>
+  <style>
+    #reviewSection {
+      display: none; /* Hidden until review button is clicked */
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Sample Form</h2>
+  
+  <form id="myForm">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+    </div>
+    
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+    </div>
+    
+    <div>
+      <label for="comments">Comments:</label>
+      <textarea id="comments" required></textarea>
+    </div>
+    
+    <br>
+
+    <button type="button" onclick="reviewFormData()">Review</button>
+  </form>
+
+  <!-- Review Section -->
+  <div id="reviewSection">
+    <h3>Review Your Details</h3>
+    <p><strong>Name:</strong> <span id="reviewName"></span></p>
+    <p><strong>Email:</strong> <span id="reviewEmail"></span></p>
+    <p><strong>Comments:</strong> <span id="reviewComments"></span></p>
+    
+    <button type="button" onclick="editForm()">Edit</button>
+    <button type="button" onclick="submitForm()">Submit</button>
+  </div>
+
+</div>
+
+<script>
+  function reviewFormData() {
+    // Get the form data
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var comments = document.getElementById('comments').value;
+
+    // Check if form fields are not empty
+    if (name && email && comments) {
+      // Display the form data in the review section
+      document.getElementById('reviewName').textContent = name;
+      document.getElementById('reviewEmail').textContent = email;
+      document.getElementById('reviewComments').textContent = comments;
+      
+      // Show the review section
+      document.getElementById('reviewSection').style.display = 'block';
+      
+      // Hide the form to let the user focus on the review
+      document.getElementById('myForm').style.display = 'none';
+    } else {
+      alert("Please fill out all fields before reviewing.");
+    }
+  }
+
+  function editForm() {
+    // Hide the review section and show the form again
+    document.getElementById('reviewSection').style.display = 'none';
+    document.getElementById('myForm').style.display = 'block';
+  }
+
+  function submitForm() {
+    alert("Form submitted successfully!");
+    // You can add logic to submit the form data here
+    // Example: document.getElementById('myForm').submit();
+  }
+</script>
+
+</body>
+</html>
