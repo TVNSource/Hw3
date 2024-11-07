@@ -2,7 +2,7 @@
     Name: Thinh Nguyen
     Name of file: homework3.js
     Date created: 09/09/2024
-    Date last edited: 10/07/2024
+    Date last edited: 11/07/2024
     Description: Assignment 3 Javascript
 */
 
@@ -15,7 +15,9 @@
  let output = document.getElementById("healthBarVal");
 	output.innerHTML = slider.value;
 	slider.oninput = function() {output.innerHTML = this.value;}	 
-	 
+ 
+ let error_flag = 0;
+ 
 //don't allow dates in the future or more than 120 years ago
 function checkDate(){
 	
@@ -33,16 +35,17 @@ function checkDate(){
 	if(myDate > currentDate){		
 		msgLabel.className = 'errorMsg';
 		msgLabel.innerHTML = "Invalid Date. Date in future.";
-	
+		error_flag = 1;	
 	}
 	else if( myDate < minDate){		
 		msgLabel.className = 'errorMsg';
 		msgLabel.innerHTML = "Invalid Date. The date is older than 120 years.";
-	
+		error_flag = 1;
 	}
 	else{
 		msgLabel.className = 'validMsg';
 		msgLabel.innerHTML = "pass";		
+		error_flag = 0;
 	}		
 }
 
@@ -63,9 +66,11 @@ function checkZip() {
         }
         zipError.innerHTML = "Pass";
         zipError.className = 'validMsg';
+		error_flag = 0;
     } else {
         zipError.innerHTML = "Invalid zip code";
         zipError.className = 'errorMsg';
+		error_flag = 1;
     }
 
 }
@@ -80,10 +85,12 @@ function checkUserID() {
     // Check if the userID matches the criteria
     if (idPattern.test(userID)) {        
 		useridError.innerHTML = "Pass";
-        useridError.className = 'validMsg';
+        useridError.className = 'validMsg';		
+		error_flag = 0;
     } else {
 		useridError.innerHTML = "Invalid userID format";
-        useridError.className = 'errorMsg';       
+        useridError.className = 'errorMsg';   
+		error_flag = 1;		
     }
 }
 
@@ -94,10 +101,12 @@ function checkPasswordMatch() {
 	let msg = document.getElementById("rePwdError");
 	if ( p==rp ){
 		msg.innerHTML = "Passwords match!";
-		msg.className = 'validMsg';	 
+		msg.className = 'validMsg';			
+		error_flag = 0; 
 	} else{
 		msg.innerHTML = "Passwords DO NOT match!";	
-		msg.className = 'errorMsg';	 		
+		msg.className = 'errorMsg';	
+		error_flag = 1;
 	}
 }
 
@@ -106,7 +115,7 @@ function checkPassword() {
 	let passMsg = document.getElementById("pwdError");
     let passInput = document.getElementById("pwd").value;	
 	let userID = document.getElementById("userID").value;
-    let error_flag = 0;
+    //let error_flag = 0;
 
     // Validate lowercase letters
     if (passInput.search(/[a-z]/) < 0) {
@@ -146,9 +155,11 @@ function checkPassword() {
     // If no errors, show success message
     if (!error_flag) {
         passOutput = "Password is valid!";
-		passMsg.className = 'validMsg';	
+		passMsg.className = 'validMsg';
+		error_flag = 0;
     }else{
-		passMsg.className = 'errorMsg';		
+		passMsg.className = 'errorMsg';
+		error_flag = 1;
 	}
 
     // Display all messages in a single element
@@ -289,8 +300,177 @@ window.onclick = function(event) {
   }
 }
 
+function checkFirstName() {
+	let firstName = document.getElementById("FirstName").value;
+	const fnErr = document.getElementById("firstnameError");   
+    const idPattern = /^[a-zA-Z'-]{1,30}$/;	
+    //check if the name matches the criteria
+    if (idPattern.test(firstName)) {        
+		fnErr.innerHTML = "Pass";
+        fnErr.className = 'validMsg';		
+		error_flag = 0;
+    } else {
+		fnErr.innerHTML = "1 to 30 characters, only letters, &quot-&quot and ' allowed.";
+        fnErr.className = 'errorMsg';
+		error_flag = 1;		
+    }
+}
+
+function checkMidName() {
+	let midName = document.getElementById("MidName").value;
+	const err = document.getElementById("midnameError");   
+    const idPattern = /^[a-zA-Z]?$/;	
+    //check if the name matches the criteria
+    if (idPattern.test(midName)) {        
+		err.innerHTML = "Pass";
+        err.className = 'validMsg';		
+		error_flag = 0;
+    } else {
+		err.innerHTML = "Optional 1 letter, no numbers";
+        err.className = 'errorMsg';
+		error_flag = 1;		
+    }
+}
+
+function checkLastName() {
+	let lastName = document.getElementById("LastName").value;
+	const err = document.getElementById("lastnameError");   
+    const idPattern = /^[a-zA-Z2-5\s'-]{1,30}$/;	
+    // Check if the name matches the criteria
+    if (idPattern.test(lastName)) {        
+		err.innerHTML = "Pass";
+        err.className = 'validMsg';		
+		error_flag = 0;
+    } else {
+		err.innerHTML = "1 to 30 characters; only letters, number 2 to 5, spaces, &quot-&quot and ' allowed";
+        err.className = 'errorMsg';       
+		error_flag = 1;
+    }
+}
+
+function checkSSN() {
+    let ssn = document.getElementById("SSN").value;
+    const err = document.getElementById("ssnError");
+
+    if (ssn.match(/^\d{3}-\d{2}-\d{4}$/)) {
+        err.innerHTML = "Pass";
+        err.className = 'validMsg';
+        error_flag = 0;
+    } else {
+        err.innerHTML = "must match xxx-xx-xxxx, number and dash only";
+        err.className = 'errorMsg';
+        error_flag = 1;
+    }
+}
 
 
+function checkAddress() {
+	let address = document.getElementById("Address1").value;
+	const err = document.getElementById("add1Error");   
+    if (address.length < 2 ) {  
+		err.innerHTML = "Minimum 2 characters";
+        err.className = 'errorMsg';       
+		error_flag = 1;
+	}else {
+		err.innerHTML = "Pass";
+        err.className = 'validMsg';		
+		error_flag = 0;		
+	}    
+	
+}
+
+function checkCity() {
+	let city = document.getElementById("City").value;
+	const err = document.getElementById("cityError");   
+     if (city.length < 2 ) {  
+		err.innerHTML = "Minimum 2 characters";
+        err.className = 'errorMsg';       
+		error_flag = 1;
+	}else {
+		err.innerHTML = "Pass";
+        err.className = 'validMsg';		
+		error_flag = 0;		
+	}    
+}
+
+
+function checkPhone() {
+	let phone = document.getElementById("Phone").value;
+	const err = document.getElementById("phoneError");   
+    
+	// Remove non-numeric characters for formatting
+    let cleaned = phone.replace(/\D/g, "");
+
+    // Apply formatting: (123) 456-7890
+    if (cleaned.length <= 3) {
+        phone = cleaned;
+    } else if (cleaned.length <= 6) {
+        phone = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
+    } else {
+        phone = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+    }
+	
+    // Update the input field with the formatted value
+    document.getElementById("Phone").value = phone;
+	
+	const idPattern = /^\(\d{3}\) \d{3}-\d{4}$/;	
+    // Check if the name matches the criteria
+    if (idPattern.test(phone)) {        
+		err.innerHTML = "Pass";
+        err.className = 'validMsg';		
+		error_flag = 0;
+    } else {
+		err.innerHTML = "enter number only";
+        err.className = 'errorMsg'; 
+		error_flag = 1;		
+    }	
+	
+	
+}
+
+function checkEmail() {
+	let email = document.getElementById("Email").value;
+	const err = document.getElementById("emailError");   
+    const idPattern = /^[0-9-]{11}$/;	
+    // Check if the name matches the criteria
+    if (idPattern.test(email)) {        
+		err.innerHTML = "Pass";
+        err.className = 'validMsg';		
+		error_flag = 0;
+    } else {
+		err.innerHTML = "Enter valid email format eg: name@domain.com";
+        err.className = 'errorMsg'; 
+		error_flag = 1;		
+    }
+}
+
+function validateInput(){
+	checkFirstName();
+	checkMidName();
+	checkLastName();
+	checkDate();
+	checkSSN();
+	checkAddress();
+	checkCity();
+	checkZip();
+	checkPhone();
+	checkEmail();
+	checkUserID();
+	checkPassword();
+	checkPasswordMatch();
+	
+	if (!error_flag){
+		document.getElementById("btnSubmit").disabled = false;
+	} else {
+		alert("Please correct the error(s) on page to continue.");
+	}
+	
+}
+ 
+ 
+
+ 
+ 
 
 
  

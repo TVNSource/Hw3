@@ -54,9 +54,11 @@ Description: Assignment 3
                                  placeholder="first name" 
                                  required 
                                  maxlength="30"
-								 title="Minimum 1 characters; only letters, &quot-&quot and ' allowed."
+								 title="Min 1 characters; only letters, &quot-&quot and ' allowed"
 								 oninvalid="this.setCustomValidity('First Name not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="firstnameError"></span>         
+								 oninput="this.setCustomValidity('')"
+								 onfocus="checkFirstName()"
+								 onblur="checkFirstName()">&ensp;<span class="errorMsg" id="firstnameError"></span>         
                         </td>
                      </tr>
                      <tr>
@@ -70,7 +72,9 @@ Description: Assignment 3
 								 pattern="[A-Z^a-z ]{0,}"
                                  placeholder="middle initial"
 								 title="Optional 1 letter, no numbers"
-                                 maxlength="1"><span class="errorMsg" id="midnameError"></span>       
+                                 maxlength="1"
+								 onfocus="checkMidName()"
+								 onblur="checkMidName()">&ensp;<span class="errorMsg" id="midnameError"></span>       
                         </td>
                      </tr>
                   
@@ -88,7 +92,9 @@ Description: Assignment 3
                                  maxlength="30"
 								 title="Minimum 1 characters; only letters, number 2 to 5, spaces, &quot-&quot and ' allowed."
 								 oninvalid="this.setCustomValidity('Last Name not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="lastnameError"></span>         
+								 oninput="this.setCustomValidity('')"
+								 onfocus="checkLastName()"
+								 onblur="checkLastName()">&ensp;<span class="errorMsg" id="lastnameError"></span>         
                         </td>
                      </tr>
                   <tr>
@@ -100,7 +106,7 @@ Description: Assignment 3
                                  id="DOB" 
                                  name="DOB" 
                                  required
-								 onblur="checkDate()"><span class="errorMsg" id="dobError"></span>
+								 onblur="checkDate()">&ensp;<span class="errorMsg" id="dobError"></span>
 															
                         </td>
                     </tr>
@@ -116,7 +122,8 @@ Description: Assignment 3
                                  maxlength="11"
 								 title="Enter number and dash only"
 								 oninvalid="this.setCustomValidity('SSN not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="ssnError"></span>       
+								 oninput="this.setCustomValidity('')"								
+								 onblur="checkSSN()">&ensp;<span class="errorMsg" id="ssnError"></span>       
                         </td>
                   </tr>
                   <tr>
@@ -147,7 +154,9 @@ Description: Assignment 3
                                  maxlength="30"
 								 title="Minimum 2 characters."
 								 oninvalid="this.setCustomValidity('Address not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="add1Error"></span>
+								 oninput="this.setCustomValidity('')"
+								 onfocus="checkAddress()"
+								 onblur="checkAddress()">&ensp;<span class="errorMsg" id="add1Error"></span>
                         </td>
                   </tr>     
                   <tr>
@@ -178,7 +187,9 @@ Description: Assignment 3
 								 maxlength="30"
 								 title="Minimum 2 characters"
 								 oninvalid="this.setCustomValidity('City not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="cityError"></span> 
+								 oninput="this.setCustomValidity('')"
+								 onfocus="checkCity()"
+								 onblur="checkCity()">&ensp;<span class="errorMsg" id="cityError"></span> 
                         </td>
                   </tr>
                   <tr>
@@ -259,7 +270,7 @@ Description: Assignment 3
 								 oninput="this.setCustomValidity('')"
 								 onfocus="checkZip()"
 								 oninput="checkZip()"
-						         onblur="checkZip()"><span class="errorMsg" id="zipError"></span>
+						         onblur="checkZip()">&ensp;<span class="errorMsg" id="zipError"></span>
 								 
                         </td>
                      </tr> 
@@ -271,12 +282,14 @@ Description: Assignment 3
                            <input type="text" 
                                  id="Phone" 
                                  name="Phone" 
-                                 placeholder="000-000-0000" 
-                                 maxlength="13"
+                                 placeholder="(000) 000-0000" 
+                                 maxlength="14"
 								 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
 								 title="Enter number only."
 								 oninvalid="this.setCustomValidity('Phone Number not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="phoneError"></span>
+								 onfocus="checkPhone()"
+								 oninput="checkPhone()"
+						         onblur="checkPhone()">&ensp;<span class="errorMsg" id="phoneError"></span>
                         </td>
                      </tr>
                      <tr>
@@ -293,7 +306,7 @@ Description: Assignment 3
 								 pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
 								 title="Enter valid email format name@domain.com"
 								 oninvalid="this.setCustomValidity('Email not valid.')"
-								 oninput="this.setCustomValidity('')"><span class="errorMsg" id="emailError"></span>
+								 oninput="this.setCustomValidity('')">&ensp;<span class="errorMsg" id="emailError"></span>
 						</td>
                      </tr>
                   <tr>
@@ -392,12 +405,12 @@ Description: Assignment 3
 								 minlength="5"		
                                  maxlength="30"
 								 pattern="[A-Za-z][A-Za-z0-9_-]{4,29}"
-								 title="UserID must be 5-30 characters long, start with a letter, and contain only letters, numbers, underscores, or dashes."
+								 title="5 to 30 characters long, start with a letter, contain only letters, numbers, underscores, or dashes."
 								 oninvalid="this.setCustomValidity('UserID not valid.')"
-								 oninput="this.setCustomValidity('')"
+								 
 								 onfocus="checkUserID()"
 								 oninput="checkUserID()"
-						         onblur="checkUserID()"><span class="errorMsg" id="useridError"></span>
+						         onblur="checkUserID()"><br><span class="errorMsg" id="useridError"></span>
                         </td>
                   </tr>     
                   <tr>
@@ -445,7 +458,7 @@ Description: Assignment 3
                         <td colspan="2" class="submit-cell">
                            <br/>
                       
-						   <input type="submit" value="Submit">
+						   <input type="submit" value="Submit" id="btnSubmit" disabled>
                            <input type="reset"  value="Clear & Start Over">						   						   
 						   <!-- <input type="submit" value="Review"  id="reviewBtn" onclick="reviewData()">-->
 						   <button type="button" class="button" onclick="reviewData()">Review</button>
