@@ -16,7 +16,7 @@
 	output.innerHTML = slider.value;
 	slider.oninput = function() {output.innerHTML = this.value;}	 
  
- let //error_flag = 0;
+ let error_flag = 0;
  
 //don't allow dates in the future or more than 120 years ago
 function checkDate(){
