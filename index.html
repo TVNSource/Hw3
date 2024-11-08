@@ -267,7 +267,6 @@ Description: Assignment 3
                                  maxlength="10"
 								 title="Minimum 5 characters; only number and &quot-&quot allowed."
 								 oninvalid="this.setCustomValidity('Zip code not valid.')"
-								 oninput="this.setCustomValidity('')"
 								 onfocus="checkZip()"
 								 oninput="checkZip()"
 						         onblur="checkZip()">&ensp;<span class="errorMsg" id="zipError"></span>
@@ -283,8 +282,7 @@ Description: Assignment 3
                                  id="Phone" 
                                  name="Phone" 
                                  placeholder="(000) 000-0000" 
-                                 maxlength="14"
-								 pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                 maxlength="14"								
 								 title="Enter number only."
 								 oninvalid="this.setCustomValidity('Phone Number not valid.')"
 								 onfocus="checkPhone()"
@@ -306,7 +304,11 @@ Description: Assignment 3
 								 pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
 								 title="Enter valid email format name@domain.com"
 								 oninvalid="this.setCustomValidity('Email not valid.')"
-								 oninput="this.setCustomValidity('')">&ensp;<span class="errorMsg" id="emailError"></span>
+								 oninput="this.setCustomValidity('')"
+								 onfocus="checkEmail()"
+								 oninput="checkEmail()"
+						         onblur="checkEmail()"
+								 >&ensp;<span class="errorMsg" id="emailError"></span>
 						</td>
                      </tr>
                   <tr>
@@ -405,12 +407,11 @@ Description: Assignment 3
 								 minlength="5"		
                                  maxlength="30"
 								 pattern="[A-Za-z][A-Za-z0-9_-]{4,29}"
-								 title="5 to 30 characters long, start with a letter, contain only letters, numbers, underscores, or dashes."
-								 oninvalid="this.setCustomValidity('UserID not valid.')"
-								 
+								 title="5 to 30 characters long, start with a letter, contain only letters, numbers, underscores, or dashes"
+								 oninvalid="this.setCustomValidity('UserID not valid.')"								 
 								 onfocus="checkUserID()"
 								 oninput="checkUserID()"
-						         onblur="checkUserID()"><br><span class="errorMsg" id="useridError"></span>
+						         onblur="checkUserID()">&ensp;<span class="errorMsg" id="useridError"></span>
                         </td>
                   </tr>     
                   <tr>
@@ -457,7 +458,7 @@ Description: Assignment 3
                      <tr>        
                         <td colspan="2" class="submit-cell">
                            <br/>
-                      
+							<button type="button" class="button" onclick="validateInput()">Validate</button>
 						   <input type="submit" value="Submit" id="btnSubmit" disabled>
                            <input type="reset"  value="Clear & Start Over">						   						   
 						   <!-- <input type="submit" value="Review"  id="reviewBtn" onclick="reviewData()">-->

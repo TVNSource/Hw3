@@ -16,12 +16,14 @@
 	output.innerHTML = slider.value;
 	slider.oninput = function() {output.innerHTML = this.value;}	 
  
- let error_flag = 0;
+ let //error_flag = 0;
  
 //don't allow dates in the future or more than 120 years ago
 function checkDate(){
 	
-	let inputDate = document.getElementById("DOB").value;
+	let inputDate = document.getElementById("DOB").value;	
+	
+
 	
 	let [year, month, day] = inputDate.split('-');
 	let myDate = new Date(year, month - 1, day);  // Month is zero-based in JS Date
@@ -32,7 +34,12 @@ function checkDate(){
 	
 	const msgLabel = document.getElementById("dobError");
 	
-	if(myDate > currentDate){		
+	if(inputDate === "" ){
+		msgLabel.className = 'errorMsg';
+		msgLabel.innerHTML = "Please enter a Date";
+		error_flag = 1;			
+	}	
+	else if(myDate > currentDate){		
 		msgLabel.className = 'errorMsg';
 		msgLabel.innerHTML = "Invalid Date. Date in future.";
 		error_flag = 1;	
@@ -44,8 +51,8 @@ function checkDate(){
 	}
 	else{
 		msgLabel.className = 'validMsg';
-		msgLabel.innerHTML = "pass";		
-		error_flag = 0;
+		msgLabel.innerHTML = "&#10003;";		
+		//error_flag = 0;
 	}		
 }
 
@@ -64,9 +71,9 @@ function checkZip() {
         if (zipCode.length === 10) {
             zipCode = zipCode.substring(0, 5);
         }
-        zipError.innerHTML = "Pass";
+        zipError.innerHTML = "&#10003;";
         zipError.className = 'validMsg';
-		error_flag = 0;
+		//error_flag = 0;
     } else {
         zipError.innerHTML = "Invalid zip code";
         zipError.className = 'errorMsg';
@@ -84,11 +91,11 @@ function checkUserID() {
 	
     // Check if the userID matches the criteria
     if (idPattern.test(userID)) {        
-		useridError.innerHTML = "Pass";
+		useridError.innerHTML = "&#10003;";
         useridError.className = 'validMsg';		
-		error_flag = 0;
+		//error_flag = 0;
     } else {
-		useridError.innerHTML = "Invalid userID format";
+		useridError.innerHTML = "5 to 30 characters, start with a letter, contain only letters, numbers, underscores, or dashes";
         useridError.className = 'errorMsg';   
 		error_flag = 1;		
     }
@@ -99,10 +106,14 @@ function checkPasswordMatch() {
 	let p = document.getElementById("pwd").value;
 	let rp = document.getElementById("rePwd").value;
 	let msg = document.getElementById("rePwdError");
-	if ( p==rp ){
+	if(p ==""){
+		msg.innerHTML = "Passwords cannot be blank";	
+		msg.className = 'errorMsg';	
+		error_flag = 1;		
+	}else if ( p==rp ){
 		msg.innerHTML = "Passwords match!";
 		msg.className = 'validMsg';			
-		error_flag = 0; 
+		//error_flag = 0; 
 	} else{
 		msg.innerHTML = "Passwords DO NOT match!";	
 		msg.className = 'errorMsg';	
@@ -115,7 +126,7 @@ function checkPassword() {
 	let passMsg = document.getElementById("pwdError");
     let passInput = document.getElementById("pwd").value;	
 	let userID = document.getElementById("userID").value;
-    //let error_flag = 0;
+    //let //error_flag = 0;
 
     // Validate lowercase letters
     if (passInput.search(/[a-z]/) < 0) {
@@ -156,7 +167,7 @@ function checkPassword() {
     if (!error_flag) {
         passOutput = "Password is valid!";
 		passMsg.className = 'validMsg';
-		error_flag = 0;
+		//error_flag = 0;
     }else{
 		passMsg.className = 'errorMsg';
 		error_flag = 1;
@@ -306,9 +317,9 @@ function checkFirstName() {
     const idPattern = /^[a-zA-Z'-]{1,30}$/;	
     //check if the name matches the criteria
     if (idPattern.test(firstName)) {        
-		fnErr.innerHTML = "Pass";
+		fnErr.innerHTML = "&#10003;";
         fnErr.className = 'validMsg';		
-		error_flag = 0;
+		//error_flag = 0;
     } else {
 		fnErr.innerHTML = "1 to 30 characters, only letters, &quot-&quot and ' allowed.";
         fnErr.className = 'errorMsg';
@@ -322,9 +333,9 @@ function checkMidName() {
     const idPattern = /^[a-zA-Z]?$/;	
     //check if the name matches the criteria
     if (idPattern.test(midName)) {        
-		err.innerHTML = "Pass";
+		err.innerHTML = "&#10003;";
         err.className = 'validMsg';		
-		error_flag = 0;
+		//error_flag = 0;
     } else {
 		err.innerHTML = "Optional 1 letter, no numbers";
         err.className = 'errorMsg';
@@ -338,9 +349,9 @@ function checkLastName() {
     const idPattern = /^[a-zA-Z2-5\s'-]{1,30}$/;	
     // Check if the name matches the criteria
     if (idPattern.test(lastName)) {        
-		err.innerHTML = "Pass";
+		err.innerHTML = "&#10003;";
         err.className = 'validMsg';		
-		error_flag = 0;
+		//error_flag = 0;
     } else {
 		err.innerHTML = "1 to 30 characters; only letters, number 2 to 5, spaces, &quot-&quot and ' allowed";
         err.className = 'errorMsg';       
@@ -353,9 +364,9 @@ function checkSSN() {
     const err = document.getElementById("ssnError");
 
     if (ssn.match(/^\d{3}-\d{2}-\d{4}$/)) {
-        err.innerHTML = "Pass";
+        err.innerHTML = "&#10003;";
         err.className = 'validMsg';
-        error_flag = 0;
+        //error_flag = 0;
     } else {
         err.innerHTML = "must match xxx-xx-xxxx, number and dash only";
         err.className = 'errorMsg';
@@ -367,14 +378,14 @@ function checkSSN() {
 function checkAddress() {
 	let address = document.getElementById("Address1").value;
 	const err = document.getElementById("add1Error");   
-    if (address.length < 2 ) {  
-		err.innerHTML = "Minimum 2 characters";
+    if (address.length < 2  || address.length > 30 ) {  
+		err.innerHTML = "Min 2 characters, max 30 characters";
         err.className = 'errorMsg';       
 		error_flag = 1;
 	}else {
-		err.innerHTML = "Pass";
+		err.innerHTML = "&#10003;";
         err.className = 'validMsg';		
-		error_flag = 0;		
+		//error_flag = 0;		
 	}    
 	
 }
@@ -382,17 +393,16 @@ function checkAddress() {
 function checkCity() {
 	let city = document.getElementById("City").value;
 	const err = document.getElementById("cityError");   
-     if (city.length < 2 ) {  
-		err.innerHTML = "Minimum 2 characters";
+     if (city.length < 2  || city.length > 30) {  
+		err.innerHTML = "Min 2 characters, max 30 characters";
         err.className = 'errorMsg';       
 		error_flag = 1;
 	}else {
-		err.innerHTML = "Pass";
+		err.innerHTML = "&#10003;";
         err.className = 'validMsg';		
-		error_flag = 0;		
+		//error_flag = 0;		
 	}    
 }
-
 
 function checkPhone() {
 	let phone = document.getElementById("Phone").value;
@@ -416,9 +426,9 @@ function checkPhone() {
 	const idPattern = /^\(\d{3}\) \d{3}-\d{4}$/;	
     // Check if the name matches the criteria
     if (idPattern.test(phone)) {        
-		err.innerHTML = "Pass";
+		err.innerHTML = "&#10003;";
         err.className = 'validMsg';		
-		error_flag = 0;
+		//error_flag = 0;
     } else {
 		err.innerHTML = "enter number only";
         err.className = 'errorMsg'; 
@@ -431,21 +441,21 @@ function checkPhone() {
 function checkEmail() {
 	let email = document.getElementById("Email").value;
 	const err = document.getElementById("emailError");   
-    const idPattern = /^[0-9-]{11}$/;	
-    // Check if the name matches the criteria
-    if (idPattern.test(email)) {        
-		err.innerHTML = "Pass";
+   
+    if (email.match(/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i)) {           
+		err.innerHTML = "&#10003;";
         err.className = 'validMsg';		
-		error_flag = 0;
+		//error_flag = 0;
     } else {
-		err.innerHTML = "Enter valid email format eg: name@domain.com";
+		err.innerHTML = "email must follow format: name@domain.tld";
         err.className = 'errorMsg'; 
 		error_flag = 1;		
     }
 }
 
 function validateInput(){
-	checkFirstName();
+	error_flag = 0;
+	checkFirstName();	
 	checkMidName();
 	checkLastName();
 	checkDate();
@@ -459,7 +469,7 @@ function validateInput(){
 	checkPassword();
 	checkPasswordMatch();
 	
-	if (!error_flag){
+	if (error_flag != "1"){		
 		document.getElementById("btnSubmit").disabled = false;
 	} else {
 		alert("Please correct the error(s) on page to continue.");
