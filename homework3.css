@@ -3,8 +3,8 @@
     Name: Thinh Nguyen
     Name of file: homework3.css
     Date created: 08/26/2024
-    Date last edited: 10/07/2024
-    Version: 7
+    Date last edited: 11/07/2024
+    Version: 11
     Description: Assignment 3 stylesheet
 */
 
@@ -238,6 +238,3 @@ a:active {
 .button:hover  {
     background-color: #674636; 
 }
-
-
-
