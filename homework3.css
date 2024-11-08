@@ -136,6 +136,10 @@ input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hove
     background-color: #674636; 
 }
 
+input[type="submit"]:disabled {
+   opacity: 0.6;
+   cursor: not-allowed;
+}
 
 /* Unvisited link */
 a:link {
@@ -158,7 +162,7 @@ a:active {
 }
 
 #healthBar{
-	width:70%;
+	width:60%;
 }
 
 
@@ -234,3 +238,6 @@ a:active {
 .button:hover  {
     background-color: #674636; 
 }
+
+
+
